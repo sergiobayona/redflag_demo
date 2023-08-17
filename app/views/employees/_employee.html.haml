@@ -1,0 +1,16 @@
+%div{id: "#{dom_id employee}"}
+  %p.my-5
+    %strong.font-medium.mb-1 Name:
+    = employee.name
+  %p.my-5
+    %strong.font-medium.mb-1 Title:
+    = employee.title
+  %p.my-5
+    %strong.font-medium.mb-1 Email:
+    = employee.email
+  %p.my-5
+    %strong.font-medium.mb-1 Work focus:
+    = employee.work_focus
+  - if action_name != "show"
+    %hr.mt-6.mb-4/
+    = link_to 'Edit this employee', edit_employee_path(employee), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"

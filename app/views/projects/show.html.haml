@@ -1,0 +1,32 @@
+.mx-auto.w-full.flex{class: "md:w-2/3"}
+  .mx-auto.w-full
+    .flex.justify-between.items-center
+      %h1.font-bold.text-3xl= @project.title
+      = link_to 'New task', new_project_task_path(@project), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"
+    - if notice.present?
+      %p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block= notice
+    = render @project
+    %p.my-5
+      %strong.font-medium.mb-1 Members:
+      = @project.users.map(&:name).join(", ")
+    %h3.font-bold.text-2xl Tasks
+    %table.table-auto.w-full.text-left.border-collapse
+      %thead
+        %tr
+          %th Title
+          %th Description
+          %th Due date
+          %th Status
+          %th Assigned to
+      %tbody
+        - @project.tasks.each do |task|
+          %tr
+            %td= link_to task.title, edit_project_task_path(@project, task), class: "underline font-medium text-blue-600"
+            %td= task.description
+            %td= task.due_date
+            %td= task.status
+            %td= task.user.name if task.user
+    = link_to 'Edit this project', edit_project_path(@project), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+    .inline-block.ml-2
+      = button_to 'Destroy this project', project_path(@project), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium"
+    = link_to 'Back to projects', projects_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
