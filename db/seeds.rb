@@ -15,9 +15,9 @@ project = Project.create!(title: 'Project 1', description: 'This is a project', 
 
 Task.create!([
                { title: 'Create login page', description: 'This is a task', creator_id: manager.id, assignee_id: User.last.id,
-                 project_id: project.id, due_date: 1.month.from_now, status: 'In Progress' },
+                 project_id: project.id, due_date: 1.month.from_now, status: 'not started', work_focus: 'Development' },
                { title: 'Design password reset workflow', description: 'This is a task', creator_id: manager.id,
-                 assignee_id: User.last.id, project_id: project.id, due_date: 1.month.from_now, status: 'In Progress' },
+                 assignee_id: User.last.id, project_id: project.id, due_date: 1.month.from_now, status: 'not started', work_focus: 'Design' },
                { title: 'End-to-end testing', description: 'This is a task', creator_id: manager.id, assignee_id: User.first.id,
-                 project_id: project.id, due_date: 1.month.from_now, status: 'In Progress' }
+                 project_id: project.id, due_date: 1.month.from_now, status: 'not started', work_focus: 'Development' },
              ])
