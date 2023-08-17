@@ -1,0 +1,9 @@
+.w-full
+  - if notice.present?
+    %p#notice.py-2.px-3.bg-green-50.mb-5.text-green-500.font-medium.rounded-lg.inline-block= notice
+  .flex.justify-between.items-center
+    %h1.font-bold.text-3xl Employees
+    - if current_user.is_a?(Manager)
+      = link_to 'New employee', new_employee_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium"
+  #projects.min-w-full
+    = render @employees

@@ -1,0 +1,29 @@
+= form_with(model: task, url: [project, task], class: "contents") do |form|
+  - if task.errors.any?
+    #error_explanation.bg-red-50.text-red-500.px-3.py-2.font-medium.rounded-lg.mt-3
+      %h2
+        = pluralize(task.errors.count, "error")
+        prohibited this task from being saved:
+      %ul
+        - task.errors.each do |error|
+          %li= error.full_message
+  .my-5
+    = form.label :title
+    = form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+  .my-5
+    = form.label :description
+    = form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+  .my-5
+    = form.label :work_focus
+    = form.select :work_focus, options_for_select(User::WORK_FOCUSES, task.work_focus), {include_blank: true}, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+  .my-5
+    = form.label :status
+    = form.select :status, options_for_select(Task::STATUSES, task.status), {include_blank: true}, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+  .my-5
+    = form.label :due_date
+    = form.date_field :due_date, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+  .my-5
+    = form.label :assignee_id
+    = form.select :assignee_id, options_from_collection_for_select(User.all, :id, :name), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full"
+  .inline
+    = form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer"

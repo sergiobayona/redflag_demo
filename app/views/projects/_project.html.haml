@@ -1,0 +1,18 @@
+%div{id: "#{dom_id project}"}
+  %p.my-5
+    %strong.font-medium.mb-1 Description:
+    = project.description
+  %p.my-5
+    %strong.font-medium.mb-1 Due date:
+    = project.due_date
+  %p.my-5
+    %strong.font-medium.mb-1 Manager:
+    = project.manager.name
+  - if action_name != "show"
+    %p.my-5
+      %strong.font-medium.mb-1 Number of tasks:
+      = project.tasks.count
+      = link_to "View project tasks", project_path(project), class: "rounded-lg py-1 px-5 inline-block font-medium underline"
+    %hr.mt-6.mb-4/
+    = link_to "Show this project", project, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+    = link_to 'Edit this project', edit_project_path(project), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"

@@ -1,0 +1,26 @@
+%div{id: "#{dom_id task}"}
+  %p.my-5
+    %strong.font-medium.mb-1 Title:
+    = task.title
+  %p.my-5
+    %strong.font-medium.mb-1 Description:
+    = task.description
+  %p.my-5
+    %strong.font-medium.mb-1 Work focus:
+    = task.work_focus
+  %p.my-5
+    %strong.font-medium.mb-1 Status:
+    = task.status
+  %p.my-5
+    %strong.font-medium.mb-1 Due date:
+    = task.due_date
+  %p.my-5
+    %strong.font-medium.mb-1 Created by:
+    = task.manager.name if task.manager
+  %p.my-5
+    %strong.font-medium.mb-1 Assigned to:
+    = task.user.name if task.user
+  - if action_name != "show"
+    = link_to "Show this task", task, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium"
+    = link_to 'Edit this task', edit_task_path(task), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium"
+    %hr.mt-6/
