@@ -3,18 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe '/projects', type: :request do
-  let!(:manager) { Manager.create!(name: 'Test Manager', email: 'manager@redflag.ai', password: '123456', title: 'Manager', work_focus: 'Management') }
+  let!(:manager) do
+    Manager.create!(name: 'Test Manager', email: 'manager@redflag.ai', password: '123456', title: 'Manager',
+                    work_focus: 'Management')
+  end
 
   let(:valid_attributes) do
-    { title: 'Test Project', description: 'Test Project Description', due_date: 1.month.from_now, manager_id: manager.id}
+    { title: 'Test Project', description: 'Test Project Description', due_date: 1.month.from_now,
+      manager_id: manager.id }
   end
 
   let(:invalid_attributes) do
-    { title: nil, description: nil, due_date: nil, manager_id: nil}
+    { title: nil, description: nil, due_date: nil, manager_id: nil }
   end
 
   before do
-    post login_path, params: {user: {:email => manager.email, :password => manager.password }}
+    post login_path, params: { user: { email: manager.email, password: manager.password } }
   end
 
   describe 'GET /index' do
@@ -79,7 +83,8 @@ RSpec.describe '/projects', type: :request do
   describe 'PATCH /update' do
     context 'with valid parameters' do
       let(:new_attributes) do
-        { title: 'New Project Title', description: 'New Project Description', due_date: 1.month.from_now, manager_id: manager.id}
+        { title: 'New Project Title', description: 'New Project Description', due_date: 1.month.from_now,
+          manager_id: manager.id }
       end
 
       it 'redirects' do

@@ -3,12 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Employees', type: :request do
-  let!(:manager) { Manager.create!(name: 'Test Manager', email: 'manager@redflag.ai', password: '123456', title: 'Manager', work_focus: 'Management') }
+  let!(:manager) do
+    Manager.create!(name: 'Test Manager', email: 'manager@redflag.ai', password: '123456', title: 'Manager',
+                    work_focus: 'Management')
+  end
 
-  let(:user_params)  { {name: 'Test Employee', email: 'test@test.com', title: 'Employee', password: 'abcd1234', work_focus: 'Development'} }
+  let(:user_params) do
+    { name: 'Test Employee', email: 'test@test.com', title: 'Employee', password: 'abcd1234',
+      work_focus: 'Development' }
+  end
 
   before do
-    post login_path, params: {user: {:email => manager.email, :password => manager.password }}
+    post login_path, params: { user: { email: manager.email, password: manager.password } }
   end
 
   describe 'GET /index' do
@@ -36,7 +42,7 @@ RSpec.describe 'Employees', type: :request do
     let!(:employee) { Employee.create!(user_params) }
 
     it 'returns http success' do
-      get '/employees/' + employee.id.to_s
+      get "/employees/#{employee.id}"
       expect(response).to have_http_status(:success)
     end
   end
@@ -45,7 +51,7 @@ RSpec.describe 'Employees', type: :request do
     let!(:employee) { Employee.create!(user_params) }
 
     it 'returns http success' do
-      delete '/employees/' + employee.id.to_s
+      delete "/employees/#{employee.id}"
       expect(response).to have_http_status(:redirect)
     end
   end

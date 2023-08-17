@@ -17,7 +17,7 @@ class EmployeesController < ProtectedController
 
   def create
     return unless current_user.is_a?(Manager)
-    
+
     @employee = Employee.new(employee_params)
 
     respond_to do |format|

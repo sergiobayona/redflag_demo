@@ -3,30 +3,38 @@
 require 'rails_helper'
 
 RSpec.describe '/tasks', type: :request do
-
-  let!(:manager) { Manager.create!(name: 'Test Manager', email: 'manager@redflag.ai', password: '123456', title: 'Manager', work_focus: 'Management') }
-  let!(:employee) { Employee.create!(name: 'Tom Brady', email: 'tome@redflag.ai', password: '123456', title: 'Developr', work_focus: 'Development') }
-  let!(:project) { Project.create!(title: 'Test Project', description: 'Test Project Description', due_date: 1.month.from_now, manager: manager)}
+  let!(:manager) do
+    Manager.create!(name: 'Test Manager', email: 'manager@redflag.ai', password: '123456', title: 'Manager',
+                    work_focus: 'Management')
+  end
+  let!(:employee) do
+    Employee.create!(name: 'Tom Brady', email: 'tome@redflag.ai', password: '123456', title: 'Developr',
+                     work_focus: 'Development')
+  end
+  let!(:project) do
+    Project.create!(title: 'Test Project', description: 'Test Project Description', due_date: 1.month.from_now,
+                    manager:)
+  end
 
   let(:valid_attributes) do
     {
-      title: 'Task 1', 
-      description: 'task desc', 
-      due_date: 1.month.from_now, 
-      manager: manager, 
-      user: employee, 
-      project: project,
+      title: 'Task 1',
+      description: 'task desc',
+      due_date: 1.month.from_now,
+      manager:,
+      user: employee,
+      project:,
       work_focus: 'Development',
       status: 'not started'
     }
   end
 
   let(:invalid_attributes) do
-    {title: 'test', work_focus: 'bad'}
+    { title: 'test', work_focus: 'bad' }
   end
 
   before do
-    post login_path, params: {user: {:email => manager.email, :password => manager.password }}
+    post login_path, params: { user: { email: manager.email, password: manager.password } }
   end
 
   describe 'GET /new' do
@@ -46,13 +54,12 @@ RSpec.describe '/tasks', type: :request do
 
   describe 'POST /create' do
     context 'with valid parameters' do
-
       let(:valid_params) do
         {
-          title: 'task 2', 
-          description: '' , 
-          work_focus: 'Development', 
-          status: 'not started', 
+          title: 'task 2',
+          description: '',
+          work_focus: 'Development',
+          status: 'not started',
           due_date: 1.month.from_now,
           assignee_id: employee.id
         }

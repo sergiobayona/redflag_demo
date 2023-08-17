@@ -21,9 +21,9 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'rubocop-rails', require: false
-  gem 'rspec-rails', '~> 6.0.0'
   gem 'rspec-mocks'
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
